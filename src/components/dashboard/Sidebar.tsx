@@ -1,0 +1,167 @@
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import {
+  MdDashboard,
+  MdArticle,
+  MdSchedule,
+  MdPeople,
+  MdTouchApp,
+  MdSettings,
+  MdNotifications,
+  MdCancel,
+  MdKeyboardArrowRight,
+  MdKeyboardArrowDown,
+  MdSecurity,
+} from "react-icons/md";
+import { BiLogOut } from "react-icons/bi";
+
+export default function Sidebar({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}) {
+  const [expandedMenu, setExpandedMenu] = useState(null);
+
+  const toggleSubMenu = (index) => {
+    setExpandedMenu(expandedMenu === index ? null : index);
+  };
+
+  const menuItems = [
+    {
+      title: "Dashboard",
+      icon: <MdDashboard size={18} />,
+      subMenus: ["Analytics", "Logistics", "Academy"],
+    },
+    {
+      title: "Posts",
+      icon: <MdArticle size={18} />,
+      subMenus: ["Help Center", "Article", "Education"],
+    },
+    {
+      title: "Schedules",
+      icon: <MdSchedule size={18} />,
+      subMenus: ["Date", "Time"],
+    },
+    {
+      title: "Audience",
+      icon: <MdPeople size={18} />,
+      subMenus: ["Users", "Leads", "Visitors"],
+    },
+    {
+      title: "Actions",
+      icon: <MdTouchApp size={18} />,
+      subMenus: ["Profile", "Logout"],
+    },
+  ];
+
+  return (
+    <nav
+      className={`
+        fixed lg:sticky top-0 left-0 z-100 h-screen bg-white shadow-lg transition-all duration-300 overflow-auto
+        ${
+          isOpen
+            ? "w-62.5 translate-x-0"
+            : "w-62.5 -translate-x-full lg:translate-x-0 lg:w-62.5"
+        }
+      `}
+    >
+      <div className="flex items-center gap-2 pt-6 pb-2 px-4 sticky top-0 bg-white min-h-16 z-100">
+        <Link href="/">
+          <img
+            src="https://readymadeui.com/readymadeui.svg"
+            alt="logo"
+            className="w-35"
+          />
+        </Link>
+        <button onClick={() => setIsOpen(false)} className="lg:hidden ml-auto">
+          <MdCancel size={24} />
+        </button>
+      </div>
+
+      <div className="py-4 px-4">
+        <ul className="space-y-2">
+          {menuItems.map((item, index) => (
+            <li key={index}>
+              <button
+                onClick={() => toggleSubMenu(index)}
+                className="w-full text-slate-800 text-[15px] font-medium flex items-center cursor-pointer hover:bg-gray-100 rounded-md px-3 py-2.5 transition-all duration-300"
+              >
+                <span className="mr-3">{item.icon}</span>
+                <span className="flex-1 text-left">{item.title}</span>
+                {expandedMenu === index ? (
+                  <MdKeyboardArrowDown />
+                ) : (
+                  <MdKeyboardArrowRight />
+                )}
+              </button>
+
+              <ul
+                className={`ml-8 overflow-hidden transition-all duration-300 ${
+                  expandedMenu === index ? "max-h-125 mt-2" : "max-h-0"
+                }`}
+              >
+                {item.subMenus.map((sub, subIndex) => (
+                  <li key={subIndex}>
+                    <Link
+                      href="#"
+                      className="text-slate-800 text-[15px] font-medium block cursor-pointer hover:bg-gray-100 rounded-md px-3 py-2 transition-all duration-300"
+                    >
+                      {sub}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-6">
+          <h6 className="text-blue-600 text-sm font-bold px-3">
+            General Settings
+          </h6>
+          <ul className="mt-3 space-y-2">
+            <li>
+              <Link
+                href="#"
+                className="text-slate-800 text-[15px] font-medium flex items-center cursor-pointer hover:bg-gray-100 rounded-md px-3 py-2.5 transition-all duration-300"
+              >
+                <MdSecurity size={18} className="mr-3" />
+                <span>Security</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="#"
+                className="text-slate-800 text-[15px] font-medium flex items-center cursor-pointer hover:bg-gray-100 rounded-md px-3 py-2.5 transition-all duration-300"
+              >
+                <MdSettings size={18} className="mr-3" />
+                <span>Preferences</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="#"
+                className="text-slate-800 text-[15px] font-medium flex items-center cursor-pointer hover:bg-gray-100 rounded-md px-3 py-2.5 transition-all duration-300"
+              >
+                <MdNotifications size={18} className="mr-3" />
+                <span>Notification Settings</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="#"
+                className="text-slate-800 text-[15px] font-medium flex items-center cursor-pointer hover:bg-gray-100 rounded-md px-3 py-2.5 transition-all duration-300"
+              >
+                <BiLogOut size={18} className="mr-3" />
+                <span>Account Deactivation</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+}
