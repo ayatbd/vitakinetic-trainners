@@ -7,14 +7,11 @@ import {
   MdSchedule,
   MdPeople,
   MdTouchApp,
-  MdSettings,
-  MdNotifications,
   MdCancel,
   MdKeyboardArrowRight,
   MdKeyboardArrowDown,
   MdSecurity,
 } from "react-icons/md";
-import { BiLogOut } from "react-icons/bi";
 import Image from "next/image";
 
 export default function Sidebar({
@@ -26,7 +23,7 @@ export default function Sidebar({
 }) {
   const [expandedMenu, setExpandedMenu] = useState(null);
 
-  const toggleSubMenu = (index) => {
+  const toggleSubMenu = (index: any) => {
     setExpandedMenu(expandedMenu === index ? null : index);
   };
 
@@ -133,33 +130,6 @@ export default function Sidebar({
               >
                 <MdSecurity size={18} className="mr-3" />
                 <span>Security</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
-                className="text-slate-800 text-[15px] font-medium flex items-center cursor-pointer hover:bg-gray-100 rounded-md px-3 py-2.5 transition-all duration-300"
-              >
-                <MdSettings size={18} className="mr-3" />
-                <span>Preferences</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
-                className="text-slate-800 text-[15px] font-medium flex items-center cursor-pointer hover:bg-gray-100 rounded-md px-3 py-2.5 transition-all duration-300"
-              >
-                <MdNotifications size={18} className="mr-3" />
-                <span>Notification Settings</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
-                className="text-slate-800 text-[15px] font-medium flex items-center cursor-pointer hover:bg-gray-100 rounded-md px-3 py-2.5 transition-all duration-300"
-              >
-                <BiLogOut size={18} className="mr-3" />
-                <span>Account Deactivation</span>
               </Link>
             </li>
           </ul>
