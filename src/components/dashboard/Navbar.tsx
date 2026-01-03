@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import {
   MdSearch,
@@ -69,7 +70,9 @@ export default function Navbar({
 
             {/* User Dropdown */}
             <div className="relative" ref={dropdownRef}>
-              <img
+              <Image
+                width={145}
+                height={145}
                 src="https://readymadeui.com/team-1.webp"
                 alt="profile-pic"
                 onClick={() => setDropdownOpen(!dropdownOpen)}

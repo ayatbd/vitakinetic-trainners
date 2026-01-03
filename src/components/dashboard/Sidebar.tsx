@@ -15,6 +15,7 @@ import {
   MdSecurity,
 } from "react-icons/md";
 import { BiLogOut } from "react-icons/bi";
+import Image from "next/image";
 
 export default function Sidebar({
   isOpen,
@@ -63,17 +64,19 @@ export default function Sidebar({
         fixed lg:sticky top-0 left-0 z-100 h-screen bg-white shadow-lg transition-all duration-300 overflow-auto
         ${
           isOpen
-            ? "w-62.5 translate-x-0"
-            : "w-62.5 -translate-x-full lg:translate-x-0 lg:w-62.5"
+            ? "w-100 translate-x-0"
+            : "w-100 -translate-x-full lg:translate-x-0 lg:w-100"
         }
       `}
     >
       <div className="flex items-center gap-2 pt-6 pb-2 px-4 sticky top-0 bg-white min-h-16 z-100">
         <Link href="/">
-          <img
-            src="https://readymadeui.com/readymadeui.svg"
+          <Image
+            width={300}
+            height={100}
+            src="/images/logo.png"
             alt="logo"
-            className="w-35"
+            className="w-32 object-contain"
           />
         </Link>
         <button onClick={() => setIsOpen(false)} className="lg:hidden ml-auto">
